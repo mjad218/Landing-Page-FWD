@@ -1,4 +1,3 @@
-
 // Get the sections 
 const sections = document.querySelectorAll("section"); 
 const header = document.querySelector("header"); 
@@ -63,20 +62,43 @@ let setActiveState = () => {
 
 window.addEventListener("scroll" , setActiveState);   
 
-
 header.append(createNav(titles)); 
 
 const menu = document.querySelector("header ul");
 const menuTop = Math.ceil(menu.getBoundingClientRect().y);
 
+
+const scrollTopBtn = document.createElement("span"); 
+scrollTopBtn.classList.add("scroll-top"); 
+scrollTopBtn.textContent = "⇑" ;  
+document.querySelector("footer").appendChild(scrollTopBtn); 
+
+scrollTopBtn.addEventListener("click" , () => {
+
+    window.scrollTo({
+        top: 0,
+        // left: coordinates[i].left,
+        behavior: 'smooth'
+    }); 
+
+});
+
 window.addEventListener("scroll" , () => {
     // console.log(menuTop); 
+
+    // sticky header
     if(menuTop <= window.scrollY ) { 
         menu.classList.add("fixed"); 
         document.querySelector("body").style.paddingTop = "60px" ; 
     } else {
         menu.classList.remove("fixed"); 
         document.querySelector("body").style.paddingTop = "0" ; 
+    }
 
+    // scroll to top feature 
+    if(window.scrollY > screen.availHeight) {
+        scrollTopBtn.classList.add("show"); 
+    } else {
+        scrollTopBtn.classList.remove("show"); 
     }
 });
