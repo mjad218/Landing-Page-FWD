@@ -11,11 +11,8 @@
 
 /* ---- Base Rules ---- */
 body {
-    background: rgb(136,203,171);
-    background: linear-gradient(0deg, rgba(136,203,171,1) 0%, rgba(0,13,60,1) 100%);
     margin: 0;
     font-family: 'Merriweather', serif;
-    color: #fff;
 }
 
 
@@ -24,25 +21,30 @@ h1 {
     font-family: 'Fira Sans', sans-serif;
     font-size: 3em;
     margin: 2em 1rem;
+    display: flex; 
+    justify-content: center;
 }
+ol , ul {
+    margin : 0 ; 
+    padding: 0;
 
+}
 @media only screen and (min-width: 35em){
     h1 {
-        font-size: 7em;
+        font-size: 4em;
         margin: 2em 4rem 1em;
     }
 }
 
 h2 {
-    border-bottom: 1px solid #cc1;
+    border-bottom: 1px solid #eee;
     font-family: 'Oxygen', Sans-Serif;
     font-size: 3em;
-    color: #fff;
+    padding-bottom: 15px;
 }
 
 p {
     line-height: 1.6em;
-    color: #eee;
 }
 
 /* ---- Layout Rules ---- */
@@ -55,11 +57,69 @@ main {
     padding-top: 3em;
 }
 
-section {
+section.container .row{
     position: relative;
     min-height: 80vh;
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; 
+    margin: 0 auto;
 }
 
+section.active {
+    background: linear-gradient(
+0deg
+, rgb(0 0 0 / 4%) 0%, rgb(0 0 0 / 0%) 100%);
+}
+
+section{
+
+    transition: all .5s ease-in-out ;
+}
+@media only screen and (min-width: 978px){
+    section.container .row {
+        flex-direction: row;
+        max-width: 1200px;
+    }   
+}
+
+/* Menu style  */
+
+header ul.menu {
+    list-style: none;
+    display: flex;
+    width: 100%;
+    top: 0;
+    background: #eee;
+    z-index: 8;
+    margin: 0;
+    justify-content: center;
+    height: 60px;
+    align-items: center;
+}
+
+header ul.fixed {
+    position: fixed;
+}
+header ul.menu li {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 15px;
+}  
+header ul.menu li.active {
+    color: #fff;
+    background: #000;
+}
+
+.about .me img {
+    border-radius: 51%;
+    padding: 5px;
+    border: 1px solid #444;
+    width: 358px;
+}
 
 /* ---- Module Rules ---- */
 
@@ -112,13 +172,12 @@ section {
 /* ---- Theme Rules ---- */
 /* Landing Container Styles */
 .landing__container {
-    padding: 1em;
-    text-align: left;
+    padding: 2em;
 }
 
 @media only screen and (min-width: 35em){
     .landing__container {
-        max-width: 50em;
+        /* max-width: 50em; */
         padding: 4em;
     }
 }
@@ -126,7 +185,6 @@ section {
 section:nth-of-type(even) .landing__container {
     margin-right: 0;
     margin-left: auto;
-    text-align: right; 
 }
 
 /* Background Circles */
@@ -187,37 +245,4 @@ section:nth-of-type(3n + 1) .landing__container::after {
     border-radius: 50%;
     opacity: 0;
     transition: ease 0.5s all;
-}
-
-
-/* ---- Theme State Rules ---- */
-/* Section Active Styles */
-/* Note: your-active-class class is applied through javascript. You should update the class here and in the index.html to what you set in your javascript file.  */
-section.your-active-class {
-    background: rgb(0, 0, 0);
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
-}
-
-section.your-active-class .landing__container::before {
-    opacity: 1;
-    animation: rotate 4s linear 0s infinite forwards;
-}
-
-section.your-active-class .landing__container::after {
-    opacity: 1;
-    animation: rotate 5s linear 0s infinite forwards reverse;
-}
-
-/* Section Active Styles Keyframe Animations */
-@keyframes rotate {
-	from {
-		transform: rotate(0deg)
-		           translate(-1em)
-		           rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg)
-		           translate(-1em) 
-		           rotate(-360deg);
-	}
 }
